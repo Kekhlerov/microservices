@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService", "PlatformService\PlatformService.csproj", "{CF95E216-5AC4-43AF-8C6F-9B957436AD5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandService", "CommandService\CommandService.csproj", "{B3FEEA98-C99E-4F79-A0B8-AACF083CAE8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{CF95E216-5AC4-43AF-8C6F-9B957436AD5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF95E216-5AC4-43AF-8C6F-9B957436AD5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF95E216-5AC4-43AF-8C6F-9B957436AD5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3FEEA98-C99E-4F79-A0B8-AACF083CAE8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3FEEA98-C99E-4F79-A0B8-AACF083CAE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3FEEA98-C99E-4F79-A0B8-AACF083CAE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3FEEA98-C99E-4F79-A0B8-AACF083CAE8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

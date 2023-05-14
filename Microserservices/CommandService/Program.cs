@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using PlatformService.Data;
-using PlatformService.SyncDataServices.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,16 +7,9 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformService", Version = "v1" });
 });
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
-
-builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
-builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+//builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
 
 var app = builder.Build();
-PrepData.PrepPopulation(app);
-
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -31,5 +21,4 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
