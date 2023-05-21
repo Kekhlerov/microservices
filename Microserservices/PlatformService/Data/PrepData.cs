@@ -1,18 +1,32 @@
+using Microsoft.EntityFrameworkCore;
 using PlatformService.Models;
 
 namespace PlatformService.Data;
 
 public static class PrepData
 {
-    public static void PrepPopulation(IApplicationBuilder app)
+    //TODO: Remove bool params
+    public static void PrepPopulation(IApplicationBuilder app, bool isProd)
     {
         using var serviceScope = app.ApplicationServices.CreateScope();
         SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>() 
-                 ?? throw new NullReferenceException("AppContext is null"));
+                 ?? throw new NullReferenceException("AppContext is null"), isProd);
     }
 
-    private static void SeedData(AppDbContext context)
+    private static void SeedData(AppDbContext context, bool isProd)
     {
+        if (isProd)
+        {
+            Console.WriteLine("--> Attempting to apply migrations...");
+            try
+            {
+                context.Database.Migrate();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Could not apply migrations {e.Message}");
+            }
+        }
         if (!context.Platforms.Any())
         {
             Console.WriteLine("----> Seeding data....");

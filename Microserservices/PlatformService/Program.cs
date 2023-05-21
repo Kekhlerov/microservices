@@ -10,7 +10,18 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformService", Version = "v1" });
 });
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+
+if (builder.Environment.IsProduction())
+{
+    Console.WriteLine("--> Using MSSQL");
+    var conf = builder.Configuration;
+    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(conf.GetConnectionString("PlatformsCon")));
+}
+else
+{
+    Console.WriteLine("--> Using InMem Db");
+    builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+}
 
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
@@ -18,7 +29,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();
-PrepData.PrepPopulation(app);
+PrepData.PrepPopulation(app, app.Environment.IsProduction());
 
 if (app.Environment.IsDevelopment())
 {
