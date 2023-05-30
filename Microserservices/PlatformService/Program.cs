@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformService", Version = "v1" });
 });
+
 builder.Services.AddControllers();
 
 if (builder.Environment.IsProduction())
